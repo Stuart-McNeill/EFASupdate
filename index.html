@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EFAS - Foot & Ankle Score</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f6fc;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1f3b75;
+      margin-bottom: 10px;
+    }
+
+    p.description {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
+    .question {
+      margin-bottom: 25px;
+    }
+
+    .question label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .options label {
+      flex: 1;
+      background: #eef1f8;
+      padding: 10px 12px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: 0.3s ease;
+      user-select: none;
+    }
+
+    .options input[type="radio"] {
+      display: none;
+    }
+
+    .options input[type="radio"]:checked + label {
+      background: #1f3b75;
+      color: #fff;
+      border-color: #1f3b75;
+    }
+
+    .submit-button {
+      display: block;
+      margin: 40px auto 0;
+      background: #1f3b75;
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background: #2d4e9e;
+    }
+
+    @media (max-width: 600px) {
+      .options {
+        flex-direction: column;
+      }
+      .options label {
+        margin-bottom: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>EFAS - European Foot & Ankle Score</h1>
+    <p class="description">Answer the following questions. Scores range from <strong>0 (worst)</strong> to <strong>4 (best)</strong>. Overall scores range from 0 (worst outcome) to 24 (best outcome).</p>
+
+    <form id="efasForm">
+      <div class="question">
+        <label>1. Do you have pain in your foot and/or ankle when you are at rest?</label>
+        <div class="options">
+          <input type="radio" name="q1" id="q1-0" value="0" required><label for="q1-0">Always (0)</label>
+          <input type="radio" name="q1" id="q1-1" value="1"><label for="q1-1">1</label>
+          <input type="radio" name="q1" id="q1-2" value="2"><label for="q1-2">2</label>
+          <input type="radio" name="q1" id="q1-3" value="3"><label for="q1-3">3</label>
+          <input type="radio" name="q1" id="q1-4" value="4"><label for="q1-4">Never (4)</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label>2. How far can you walk before you get pain in your foot and/or ankle?</label>
+        <div class="options">
+          <input type="radio" name="q2" id="q2-0" value="0" required><label for="q2-0">Impossible (0)</label>
+          <input type="radio" name="q2" id="q2-1" value="1"><label for="q2-1">1</label>
+          <input type="radio" name="q2" id="q2-2" value="2"><label for="q2-2">2</label>
+          <input type="radio" name="q2" id="q2-3" value="3"><label for="q2-3">3</label>
+          <input type="radio" name="q2" id="q2-4" value="4"><label for="q2-4">No Limitation (4)</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label>3. How much has your gait (i.e., the way you walk) changed because of your foot and/or ankle problem?</label>
+        <div class="options">
+          <input type="radio" name="q3" id="q3-0" value="0" required><label for="q3-0">Extreme (0)</label>
+          <input type="radio" name="q3" id="q3-1" value="1"><label for="q3-1">1</label>
+          <input type="radio" name="q3" id="q3-2" value="2"><label for="q3-2">2</label>
+          <input type="radio" name="q3" id="q3-3" value="3"><label for="q3-3">3</label>
+          <input type="radio" name="q3" id="q3-4" value="4"><label for="q3-4">No Change (4)</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label>4. Do you have difficulty walking on uneven surfaces?</label>
+        <div class="options">
+          <input type="radio" name="q4" id="q4-0" value="0" required><label for="q4-0">Always (0)</label>
+          <input type="radio" name="q4" id="q4-1" value="1"><label for="q4-1">1</label>
+          <input type="radio" name="q4" id="q4-2" value="2"><label for="q4-2">2</label>
+          <input type="radio" name="q4" id="q4-3" value="3"><label for="q4-3">3</label>
+          <input type="radio" name="q4" id="q4-4" value="4"><label for="q4-4">Never (4)</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label>5. Do you have pain in your foot and/or ankle when you are walking?</label>
+        <div class="options">
+          <input type="radio" name="q5" id="q5-0" value="0" required><label for="q5-0">Always (0)</label>
+          <input type="radio" name="q5" id="q5-1" value="1"><label for="q5-1">1</label>
+          <input type="radio" name="q5" id="q5-2" value="2"><label for="q5-2">2</label>
+          <input type="radio" name="q5" id="q5-3" value="3"><label for="q5-3">3</label>
+          <input type="radio" name="q5" id="q5-4" value="4"><label for="q5-4">Never (4)</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label>6. How often do you have pain in your foot and/or ankle during physical activity?</label>
+        <div class="options">
+          <input type="radio" name="q6" id="q6-0" value="0" required><label for="q6-0">Always (0)</label>
+          <input type="radio" name="q6" id="q6-1" value="1"><label for="q6-1">1</label>
+          <input type="radio" name="q6" id="q6-2" value="2"><label for="q6-2">2</label>
+          <input type="radio" name="q6" id="q6-3" value="3"><label for="q6-3">3</label>
+          <input type="radio" name="q6" id="q6-4" value="4"><label for="q6-4">Never (4)</label>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-button">Submit & Download</button>
+    </form>
+  </div>
+
+  <script>
+    const questionsText = {
+      q1: "Do you have pain in your foot and/or ankle when you are at rest?",
+      q2: "How far can you walk before you get pain in your foot and/or ankle?",
+      q3: "How much has your gait (i.e., the way you walk) changed because of your foot and/or ankle problem?",
+      q4: "Do you have difficulty walking on uneven surfaces?",
+      q5: "Do you have pain in your foot and/or ankle when you are walking?",
+      q6: "How often do you have pain in your foot and/or ankle during physical activity?"
+    };
+
+    document.getElementById('efasForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+
+      // Validate all questions answered
+      for (const q of Object.keys(questionsText)) {
+        if (!formData.has(q)) {
+          alert(`Please answer question: ${questionsText[q]}`);
+          return;
+        }
+      }
+
+      let totalScore = 0;
+      let output = 'EFAS Questionnaire Results\n\n';
+
+      for (const q of Object.keys(questionsText)) {
+        const val = formData.get(q);
+        output += `${questionsText[q]}: ${val}\n`;
+        totalScore += parseInt(val, 10);
+      }
+
+      output += `\nTotal Score: ${totalScore} / 24`;
+
+      // Create and download the text file
+      const blob = new Blob([output], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'EFAS-Results.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  </script>
+
+</body>
+</html>
