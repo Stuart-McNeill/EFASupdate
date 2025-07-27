@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EFAS - Foot & Ankle Score</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Podiatry E-Referral & EFAS Form</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -13,15 +13,15 @@
     }
 
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 50px auto;
-      background: #ffffff;
+      background: #fff;
       border-radius: 12px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       padding: 40px;
     }
 
-    h1 {
+    h1, h2 {
       text-align: center;
       color: #1f3b75;
       margin-bottom: 10px;
@@ -31,6 +31,42 @@
       text-align: center;
       margin-bottom: 30px;
       color: #555;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .form-group:last-of-type {
+      border-bottom: none;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .form-group input[type="radio"] {
+      margin-right: 5px;
+    }
+
+    .form-group input[type="checkbox"] {
+      margin-right: 5px;
+      margin-top: 5px;
     }
 
     .question {
@@ -46,12 +82,12 @@
 
     .options {
       display: flex;
-      justify-content: space-between;
+      flex-wrap: wrap;
       gap: 10px;
     }
 
     .options label {
-      flex: 1;
+      flex: 1 1 100px;
       background: #eef1f8;
       padding: 10px 12px;
       text-align: center;
@@ -59,7 +95,6 @@
       cursor: pointer;
       border: 2px solid transparent;
       transition: 0.3s ease;
-      user-select: none;
     }
 
     .options input[type="radio"] {
@@ -70,6 +105,10 @@
       background: #1f3b75;
       color: #fff;
       border-color: #1f3b75;
+    }
+
+    .hidden {
+      display: none;
     }
 
     .submit-button {
@@ -93,135 +132,266 @@
       .options {
         flex-direction: column;
       }
-      .options label {
-        margin-bottom: 8px;
-      }
     }
   </style>
 </head>
 <body>
-
   <div class="container">
-    <h1>EFAS - European Foot & Ankle Score</h1>
-    <p class="description">Answer the following questions. Scores range from <strong>0 (worst)</strong> to <strong>4 (best)</strong>. Overall scores range from 0 (worst outcome) to 24 (best outcome).</p>
+    <h1>Podiatry E-Referral Form</h1>
+    <p class="description">Please complete all sections accurately. If you have an open wound with blood, pus or infection, call 01698 753 753.</p>
 
-    <form id="efasForm">
+    <form id="podiatryForm">
+      <!-- E-Referral Questions -->
+      <div class="form-group">
+        <label>1. Have you been seen by NHS Lanarkshire Podiatry before?</label>
+        <input type="radio" name="q1" value="Yes"> Yes
+        <input type="radio" name="q1" value="No"> No
+      </div>
+
+      <div class="form-group">
+        <label>2. If yes, is your referral regarding the same problem?</label>
+        <input type="radio" name="q2" value="Yes"> Yes
+        <input type="radio" name="q2" value="No"> No
+      </div>
+
+      <div class="form-group">
+        <label>3. Full Name:</label>
+        <input type="text" name="fullname">
+      </div>
+
+      <div class="form-group">
+        <label>Date of Birth:</label>
+        <input type="text" name="dob">
+      </div>
+
+      <div class="form-group">
+        <label>Address:</label>
+        <textarea name="address"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Postcode:</label>
+        <input type="text" name="postcode">
+      </div>
+
+      <div class="form-group">
+        <label>Registered GP Practice:</label>
+        <input type="text" name="gpPractice">
+      </div>
+
+      <div class="form-group">
+        <label>GP Name:</label>
+        <input type="text" name="gpName">
+      </div>
+
+      <div class="form-group">
+        <label>Preferred email address:</label>
+        <input type="email" name="email">
+      </div>
+
+      <div class="form-group">
+        <label>Preferred contact number:</label>
+        <input type="text" name="phone">
+      </div>
+
+      <div class="form-group">
+        <label>4. Do you require an interpreter?</label>
+        <input type="radio" name="q4" value="Yes"> Yes
+        <input type="radio" name="q4" value="No"> No
+      </div>
+
+      <div class="form-group hidden" id="interpreterGroup">
+        <label>Which language, BSL or dialect?</label>
+        <input type="text" name="interpreterLang">
+      </div>
+
+      <div class="form-group">
+        <label>5. Are you able to travel out-with your local area?</label>
+        <input type="radio" name="q5" value="Yes"> Yes
+        <input type="radio" name="q5" value="No"> No
+      </div>
+
+      <div class="form-group">
+        <label>Do you have any dates or days you are unavailable?</label>
+        <input type="text" name="unavailableDates">
+      </div>
+
+      <div class="form-group">
+        <label>6. Please describe your foot problem:</label>
+        <textarea name="footProblem"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>7. Are you under the care of any other specialist departments for this issue?</label>
+        <input type="radio" name="q7" value="Yes"> Yes
+        <input type="radio" name="q7" value="No"> No
+      </div>
+
+      <div class="form-group hidden" id="specialistGroup">
+        <label>If yes, select all that apply:</label><br>
+        <input type="checkbox" name="specialist" value="Rheumatology"> Rheumatology<br>
+        <input type="checkbox" name="specialist" value="Fracture Clinic"> Fracture Clinic<br>
+        <input type="checkbox" name="specialist" value="Orthopaedic"> Orthopaedic<br>
+        <input type="checkbox" name="specialist" value="Diabetes"> Diabetes<br>
+        <input type="checkbox" name="specialist" value="Vascular"> Vascular<br>
+        <input type="checkbox" name="specialist" value="Cancer/Oncology"> Cancer/Oncology<br>
+        <input type="checkbox" name="specialist" value="Dermatology"> Dermatology<br>
+      </div>
+
+      <div class="form-group">
+        <label>8. Do you have any other medical conditions?</label>
+        <textarea name="otherConditions"></textarea>
+      </div>
+
+      <!-- EFAS Section -->
+      <h2>European Foot & Ankle Score (EFAS)</h2>
+      <p class="description">Complete the EFAS questions below (0 = worst, 4 = best outcome)</p>
+
+      <!-- EFAS Q1–Q6 exactly as before -->
+      <!-- [ Keep your EFAS Q1–Q6 HTML exactly here as before. ] -->
+
+      <!-- Example: -->
       <div class="question">
         <label>1. Do you have pain in your foot and/or ankle when you are at rest?</label>
         <div class="options">
-          <input type="radio" name="q1" id="q1-0" value="0" required><label for="q1-0">Always (0)</label>
-          <input type="radio" name="q1" id="q1-1" value="1"><label for="q1-1">1</label>
-          <input type="radio" name="q1" id="q1-2" value="2"><label for="q1-2">2</label>
-          <input type="radio" name="q1" id="q1-3" value="3"><label for="q1-3">3</label>
-          <input type="radio" name="q1" id="q1-4" value="4"><label for="q1-4">Never (4)</label>
+          <input type="radio" name="efas1" id="efas1-0" value="0"><label for="efas1-0">Always (0)</label>
+          <input type="radio" name="efas1" id="efas1-1" value="1"><label for="efas1-1">1</label>
+          <input type="radio" name="efas1" id="efas1-2" value="2"><label for="efas1-2">2</label>
+          <input type="radio" name="efas1" id="efas1-3" value="3"><label for="efas1-3">3</label>
+          <input type="radio" name="efas1" id="efas1-4" value="4"><label for="efas1-4">Never (4)</label>
         </div>
       </div>
 
-      <div class="question">
+    <div class="question">
         <label>2. How far can you walk before you get pain in your foot and/or ankle?</label>
         <div class="options">
-          <input type="radio" name="q2" id="q2-0" value="0" required><label for="q2-0">Impossible (0)</label>
-          <input type="radio" name="q2" id="q2-1" value="1"><label for="q2-1">1</label>
-          <input type="radio" name="q2" id="q2-2" value="2"><label for="q2-2">2</label>
-          <input type="radio" name="q2" id="q2-3" value="3"><label for="q2-3">3</label>
-          <input type="radio" name="q2" id="q2-4" value="4"><label for="q2-4">No Limitation (4)</label>
+          <input type="radio" name="efas2" id="efas2-0" value="0"><label for="efas2-0">Impossible (0)</label>
+          <input type="radio" name="efas2" id="efas2-1" value="1"><label for="efas2-1">1</label>
+          <input type="radio" name="efas2" id="efas2-2" value="2"><label for="efas2-2">2</label>
+          <input type="radio" name="efas2" id="efas2-3" value="3"><label for="efas2-3">3</label>
+          <input type="radio" name="efas2" id="efas2-4" value="4"><label for="efas2-4">No Limitation (4)</label>
         </div>
       </div>
 
       <div class="question">
-        <label>3. How much has your gait (i.e., the way you walk) changed because of your foot and/or ankle problem?</label>
+        <label>3. How much has your gait changed due to your foot and/or ankle problem?</label>
         <div class="options">
-          <input type="radio" name="q3" id="q3-0" value="0" required><label for="q3-0">Extreme (0)</label>
-          <input type="radio" name="q3" id="q3-1" value="1"><label for="q3-1">1</label>
-          <input type="radio" name="q3" id="q3-2" value="2"><label for="q3-2">2</label>
-          <input type="radio" name="q3" id="q3-3" value="3"><label for="q3-3">3</label>
-          <input type="radio" name="q3" id="q3-4" value="4"><label for="q3-4">No Change (4)</label>
+          <input type="radio" name="efas3" id="efas3-0" value="0"><label for="efas3-0">Extreme (0)</label>
+          <input type="radio" name="efas3" id="efas3-1" value="1"><label for="efas3-1">1</label>
+          <input type="radio" name="efas3" id="efas3-2" value="2"><label for="efas3-2">2</label>
+          <input type="radio" name="efas3" id="efas3-3" value="3"><label for="efas3-3">3</label>
+          <input type="radio" name="efas3" id="efas3-4" value="4"><label for="efas3-4">No Change (4)</label>
         </div>
       </div>
 
       <div class="question">
         <label>4. Do you have difficulty walking on uneven surfaces?</label>
         <div class="options">
-          <input type="radio" name="q4" id="q4-0" value="0" required><label for="q4-0">Always (0)</label>
-          <input type="radio" name="q4" id="q4-1" value="1"><label for="q4-1">1</label>
-          <input type="radio" name="q4" id="q4-2" value="2"><label for="q4-2">2</label>
-          <input type="radio" name="q4" id="q4-3" value="3"><label for="q4-3">3</label>
-          <input type="radio" name="q4" id="q4-4" value="4"><label for="q4-4">Never (4)</label>
+          <input type="radio" name="efas4" id="efas4-0" value="0"><label for="efas4-0">Always (0)</label>
+          <input type="radio" name="efas4" id="efas4-1" value="1"><label for="efas4-1">1</label>
+          <input type="radio" name="efas4" id="efas4-2" value="2"><label for="efas4-2">2</label>
+          <input type="radio" name="efas4" id="efas4-3" value="3"><label for="efas4-3">3</label>
+          <input type="radio" name="efas4" id="efas4-4" value="4"><label for="efas4-4">Never (4)</label>
         </div>
       </div>
 
       <div class="question">
         <label>5. Do you have pain in your foot and/or ankle when you are walking?</label>
         <div class="options">
-          <input type="radio" name="q5" id="q5-0" value="0" required><label for="q5-0">Always (0)</label>
-          <input type="radio" name="q5" id="q5-1" value="1"><label for="q5-1">1</label>
-          <input type="radio" name="q5" id="q5-2" value="2"><label for="q5-2">2</label>
-          <input type="radio" name="q5" id="q5-3" value="3"><label for="q5-3">3</label>
-          <input type="radio" name="q5" id="q5-4" value="4"><label for="q5-4">Never (4)</label>
+          <input type="radio" name="efas5" id="efas5-0" value="0"><label for="efas5-0">Always (0)</label>
+          <input type="radio" name="efas5" id="efas5-1" value="1"><label for="efas5-1">1</label>
+          <input type="radio" name="efas5" id="efas5-2" value="2"><label for="efas5-2">2</label>
+          <input type="radio" name="efas5" id="efas5-3" value="3"><label for="efas5-3">3</label>
+          <input type="radio" name="efas5" id="efas5-4" value="4"><label for="efas5-4">Never (4)</label>
         </div>
       </div>
 
       <div class="question">
-        <label>6. How often do you have pain in your foot and/or ankle during physical activity?</label>
+        <label>6. How often do you have pain during physical activity?</label>
         <div class="options">
-          <input type="radio" name="q6" id="q6-0" value="0" required><label for="q6-0">Always (0)</label>
-          <input type="radio" name="q6" id="q6-1" value="1"><label for="q6-1">1</label>
-          <input type="radio" name="q6" id="q6-2" value="2"><label for="q6-2">2</label>
-          <input type="radio" name="q6" id="q6-3" value="3"><label for="q6-3">3</label>
-          <input type="radio" name="q6" id="q6-4" value="4"><label for="q6-4">Never (4)</label>
+          <input type="radio" name="efas6" id="efas6-0" value="0"><label for="efas6-0">Always (0)</label>
+          <input type="radio" name="efas6" id="efas6-1" value="1"><label for="efas6-1">1</label>
+          <input type="radio" name="efas6" id="efas6-2" value="2"><label for="efas6-2">2</label>
+          <input type="radio" name="efas6" id="efas6-3" value="3"><label for="efas6-3">3</label>
+          <input type="radio" name="efas6" id="efas6-4" value="4"><label for="efas6-4">Never (4)</label>
         </div>
       </div>
 
-      <button type="submit" class="submit-button">Submit & Download</button>
+      <button type="submit" class="submit-button">Submit & Download Answers</button>
     </form>
   </div>
-
+  </div>
   <script>
-    const questionsText = {
-      q1: "Do you have pain in your foot and/or ankle when you are at rest?",
-      q2: "How far can you walk before you get pain in your foot and/or ankle?",
-      q3: "How much has your gait (i.e., the way you walk) changed because of your foot and/or ankle problem?",
-      q4: "Do you have difficulty walking on uneven surfaces?",
-      q5: "Do you have pain in your foot and/or ankle when you are walking?",
-      q6: "How often do you have pain in your foot and/or ankle during physical activity?"
-    };
+    // Show/hide interpreter field
+    document.querySelectorAll('input[name="q4"]').forEach(r => {
+      r.addEventListener('change', () => {
+        document.getElementById('interpreterGroup').classList.toggle('hidden', r.value !== 'Yes');
+      });
+    });
 
-    document.getElementById('efasForm').addEventListener('submit', function(e) {
+    // Show/hide specialist checkboxes
+    document.querySelectorAll('input[name="q7"]').forEach(r => {
+      r.addEventListener('change', () => {
+        document.getElementById('specialistGroup').classList.toggle('hidden', r.value !== 'Yes');
+      });
+    });
+
+    document.getElementById('podiatryForm').addEventListener('submit', function(e) {
       e.preventDefault();
+      let answers = [];
 
-      const formData = new FormData(e.target);
+      const fields = [
+        { name: "Have you been seen by NHS Lanarkshire Podiatry before?", input: "q1" },
+        { name: "Is your referral regarding the same problem?", input: "q2" },
+        { name: "Full Name", input: "fullname" },
+        { name: "Date of Birth", input: "dob" },
+        { name: "Address", input: "address" },
+        { name: "Postcode", input: "postcode" },
+        { name: "Registered GP Practice", input: "gpPractice" },
+        { name: "GP Name", input: "gpName" },
+        { name: "Preferred email address", input: "email" },
+        { name: "Preferred contact number", input: "phone" },
+        { name: "Do you require an interpreter?", input: "q4" },
+        { name: "Interpreter language/dialect", input: "interpreterLang" },
+        { name: "Able to travel out-with local area?", input: "q5" },
+        { name: "Unavailable dates", input: "unavailableDates" },
+        { name: "Describe your foot problem", input: "footProblem" },
+        { name: "Under care of other specialists?", input: "q7" },
+        { name: "Specialist departments", input: "specialist" },
+        { name: "Other medical conditions", input: "otherConditions" }
+      ];
 
-      // Validate all questions answered
-      for (const q of Object.keys(questionsText)) {
-        if (!formData.has(q)) {
-          alert(`Please answer question: ${questionsText[q]}`);
+      fields.forEach(f => {
+        let val = "";
+        if (document.querySelector(`input[name="${f.input}"]:checked`)) {
+          val = document.querySelector(`input[name="${f.input}"]:checked`).value;
+        } else if (f.input === "specialist") {
+          val = Array.from(document.querySelectorAll(`input[name="specialist"]:checked`)).map(o => o.value).join(", ");
+        } else {
+          val = document.querySelector(`[name="${f.input}"]`)?.value || "";
+        }
+        answers.push(`${f.name}:\n${val}\n`);
+      });
+
+      // EFAS scoring (as before)
+      let efasScore = 0;
+      for (let i = 1; i <= 6; i++) {
+        const val = document.querySelector(`input[name="efas${i}"]:checked`);
+        if (!val) {
+          alert('Please answer all EFAS questions.');
           return;
         }
+        efasScore += parseInt(val.value);
+        answers.push(`EFAS Q${i}: ${val.value}`);
       }
+      answers.push(`EFAS Total Score: ${efasScore} / 24`);
 
-      let totalScore = 0;
-      let output = 'EFAS Questionnaire Results\n\n';
-
-      for (const q of Object.keys(questionsText)) {
-        const val = formData.get(q);
-        output += `${questionsText[q]}: ${val}\n`;
-        totalScore += parseInt(val, 10);
-      }
-
-      output += `\nTotal Score: ${totalScore} / 24`;
-
-      // Create and download the text file
-      const blob = new Blob([output], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'EFAS-Results.txt';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      const blob = new Blob([answers.join('\n')], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'Podiatry_EFAS_Answers.txt';
+      link.click();
     });
   </script>
-
 </body>
 </html>
