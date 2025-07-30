@@ -138,7 +138,12 @@
 <body>
   <div class="container">
     <h1>Podiatry E-Referral Form</h1>
-    <p class="description">Please complete all sections accurately. If you have an open wound with blood, pus or infection, call 01698 753 753.</p>
+    
+    <p class="description">Please complete all sections accurately.</p>
+
+    <p style="font-size: 18px; color: red; font-weight: bold;">
+      If you have an open wound that is bleeding, oozing pus, or showing any signs of infection — such as a foot that becomes swollen, hot to the touch, painful, or red (especially noticeable in lighter skin tones) — or if you notice unusual colour changes like darkening, purple, grey, pale, or blue toes, please contact the Podiatry Hub on 01698 753 753.
+    </p>
 
     <form id="podiatryForm">
       <!-- E-Referral Questions -->
@@ -274,7 +279,7 @@
       </div>
 
       <div class="question">
-        <label>3. How much has your gait changed due to your foot and/or ankle problem?</label>
+        <label>3. How much has your gait (i.e., the way you walk) changed because of your foot and/or ankle problem?</label>
         <div class="options">
           <input type="radio" name="efas3" id="efas3-0" value="0"><label for="efas3-0">Extreme (0)</label>
           <input type="radio" name="efas3" id="efas3-1" value="1"><label for="efas3-1">1</label>
@@ -307,7 +312,7 @@
       </div>
 
       <div class="question">
-        <label>6. How often do you have pain during physical activity?</label>
+        <label>6. How often do you have pain in your foot and/or ankle during physical activity?</label>
         <div class="options">
           <input type="radio" name="efas6" id="efas6-0" value="0"><label for="efas6-0">Always (0)</label>
           <input type="radio" name="efas6" id="efas6-1" value="1"><label for="efas6-1">1</label>
@@ -363,15 +368,16 @@
 
       fields.forEach(f => {
         let val = "";
-        if (document.querySelector(`input[name="${f.input}"]:checked`)) {
+        if (f.input === "specialist") {
+          const checked = document.querySelectorAll(`input[name="specialist"]:checked`);
+          val = Array.from(checked).map(cb => cb.value).join(", ");
+        } else if (document.querySelector(`input[name="${f.input}"]:checked`)) {
           val = document.querySelector(`input[name="${f.input}"]:checked`).value;
-        } else if (f.input === "specialist") {
-          val = Array.from(document.querySelectorAll(`input[name="specialist"]:checked`)).map(o => o.value).join(", ");
         } else {
           val = document.querySelector(`[name="${f.input}"]`)?.value || "";
         }
         answers.push(`${f.name}:\n${val}\n`);
-      });
+        });
 
       // EFAS scoring (as before)
       let efasScore = 0;
